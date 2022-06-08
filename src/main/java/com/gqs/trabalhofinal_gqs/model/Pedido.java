@@ -56,7 +56,6 @@ public class Pedido {
     public void addItem(ItemPedido item){
         this.produtos.add(item);
         this.valor += item.getValorTotal();
-        this.valorTotalAPagar += item.getValorTotal();
     }
 
     public void calcularValorTotal(){

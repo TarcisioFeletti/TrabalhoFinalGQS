@@ -24,7 +24,7 @@ public class ProcessaDesconto {
             double porcentagemDesconto = 0;
             for(ItemPedido item : pedido.getProdutos()){
                 for(IDesconto desconto : descontos){
-                    System.out.println(porcentagemDesconto);
+                    porcentagemDesconto += desconto.calcular(item.getItem()) / 100;
                 }
                 pedido.addDescontos(item.getValorTotal() * porcentagemDesconto);
                 porcentagemDesconto = 0;
