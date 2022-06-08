@@ -24,10 +24,12 @@ public class ProcessaDesconto {
             double porcentagemDesconto = 0;
             for(ItemPedido item : pedido.getProdutos()){
                 for(IDesconto desconto : descontos){
-                    porcentagemDesconto += desconto.calcular(item.getItem()) / 100;
+                    System.out.println(porcentagemDesconto);
                 }
                 pedido.addDescontos(item.getValorTotal() * porcentagemDesconto);
+                porcentagemDesconto = 0;
             }
+            pedido.calcularValorTotal();
         }
     }
 }

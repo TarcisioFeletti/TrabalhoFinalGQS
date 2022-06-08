@@ -1,1 +1,8 @@
-com\gqs\trabalhofinal_gqs\Teste.class
+com\gqs\trabalhofinal_gqs\model\descontoChain\DescontoTipo.class
+com\gqs\trabalhofinal_gqs\model\descontoChain\DescontoNatal.class
+com\gqs\trabalhofinal_gqs\model\descontoChain\IDesconto.class
+com\gqs\trabalhofinal_gqs\model\descontoChain\DescontoIncentivo.class
+com\gqs\trabalhofinal_gqs\model\ItemPedido.class
+com\gqs\trabalhofinal_gqs\model\Produto.class
+com\gqs\trabalhofinal_gqs\model\Pedido.class
+com\gqs\trabalhofinal_gqs\model\descontoChain\ProcessaDesconto.class
