@@ -47,10 +47,18 @@ public class Pedido {
 
     public void addDescontos(double valorDesconto) {
         this.valorTotalDescontos += valorDesconto;
-        this.valorTotalAPagar -= valorTotalDescontos;
     }
 
     public ArrayList<ItemPedido> getProdutos() {
         return produtos;
+    }
+
+    public void addItem(ItemPedido item){
+        this.produtos.add(item);
+        this.valor += item.getValorTotal();
+    }
+
+    public void calcularValorTotal(){
+        this.valorTotalAPagar = this.valor + this.valorTotalImpostos - this.valorTotalDescontos;
     }
 }

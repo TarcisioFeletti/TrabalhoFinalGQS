@@ -7,11 +7,10 @@ public class ItemPedido {
     private double valorUnitario;
     private double valorTotal;
 
-    public ItemPedido(Pedido pedido, Produto item, int quantidade, double valorUnitario) {
-        this.pedido = pedido;
+    public ItemPedido(Produto item, int quantidade) {
         this.item = item;
         this.quantidade = quantidade;
-        this.valorUnitario = valorUnitario;
+        this.valorUnitario = item.getPrecoUnitario();
         this.valorTotal = this.quantidade * this.valorUnitario;
     }
 

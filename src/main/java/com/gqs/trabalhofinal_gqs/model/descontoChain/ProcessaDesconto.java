@@ -27,7 +27,9 @@ public class ProcessaDesconto {
                     porcentagemDesconto += desconto.calcular(item.getItem()) / 100;
                 }
                 pedido.addDescontos(item.getValorTotal() * porcentagemDesconto);
+                porcentagemDesconto = 0;
             }
+            pedido.calcularValorTotal();
         }
     }
 }
