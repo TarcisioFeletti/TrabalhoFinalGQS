@@ -1,5 +1,7 @@
 package com.gqs.trabalhofinal_gqs.model;
 
+import org.jetbrains.annotations.NotNull;
+
 public class ItemPedido {
     private Pedido pedido;
     private Produto item;
@@ -7,7 +9,8 @@ public class ItemPedido {
     private double valorUnitario;
     private double valorTotal;
 
-    public ItemPedido(Produto item, int quantidade) {
+    public ItemPedido(Pedido pedido, Produto item, int quantidade) {
+        this.pedido = pedido;
         this.item = item;
         this.quantidade = quantidade;
         this.valorUnitario = item.getPrecoUnitario();

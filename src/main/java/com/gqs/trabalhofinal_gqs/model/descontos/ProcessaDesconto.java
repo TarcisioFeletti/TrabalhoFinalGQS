@@ -1,8 +1,7 @@
-package com.gqs.trabalhofinal_gqs.model.descontoChain;
+package com.gqs.trabalhofinal_gqs.model.descontos;
 
 import com.gqs.trabalhofinal_gqs.model.ItemPedido;
 import com.gqs.trabalhofinal_gqs.model.Pedido;
-import com.gqs.trabalhofinal_gqs.model.Produto;
 
 import java.util.ArrayList;
 
@@ -18,7 +17,7 @@ public class ProcessaDesconto {
         descontos.add(new DescontoIncentivo());
     }
     public void calculaDesconto() throws RuntimeException{
-        if(pedido.getProdutos().size() == 0){
+        if(pedido.getProdutos().isEmpty()){
             throw new RuntimeException("Não é possível calcular os descontos com um pedido vazio");
         }else{
             double porcentagemDesconto = 0;
@@ -29,7 +28,6 @@ public class ProcessaDesconto {
                 pedido.addDescontos(item.getValorTotal() * porcentagemDesconto);
                 porcentagemDesconto = 0;
             }
-            pedido.calcularValorTotal();
         }
     }
 }
