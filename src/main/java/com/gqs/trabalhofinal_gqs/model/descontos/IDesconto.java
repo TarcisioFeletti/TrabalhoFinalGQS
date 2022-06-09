@@ -1,4 +1,4 @@
-package com.gqs.trabalhofinal_gqs.model.descontoChain;
+package com.gqs.trabalhofinal_gqs.model.descontos;
 
 import com.gqs.trabalhofinal_gqs.model.Produto;
 

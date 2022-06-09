@@ -2,6 +2,7 @@ package com.gqs.trabalhofinal_gqs.model;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Pedido {
     private int numero;
@@ -10,55 +11,69 @@ public class Pedido {
     private double valorTotalImpostos;
     private double valorTotalAPagar;
     private double valorTotalDescontos;
-    private ArrayList<ItemPedido> produtos;
+    private List<ItemPedido> produtos;
+    private List<Imposto> impostos;
+    private Cliente cliente;
 
-    public Pedido(int numero, LocalDateTime data, double valorTotalImpostos, ArrayList<ItemPedido> produtos) {
+    public Pedido(int numero, LocalDateTime data, Cliente cliente) {
         this.numero = numero;
         this.data = data;
-        this.produtos = produtos;
+        this.produtos = new ArrayList<>();
+        this.impostos = new ArrayList<>();
         this.valor = 0;
-        for(ItemPedido item : produtos){
-            this.valor += item.getValorTotal();
-        }
-        this.valorTotalImpostos = valorTotalImpostos;
-        this.valorTotalAPagar = valor + valorTotalImpostos;
+        this.valorTotalImpostos = 0;
         this.valorTotalDescontos = 0;
+        this.cliente = cliente;
     }
 
+    //Gets
     public int getNumero() {
         return numero;
     }
-
     public LocalDateTime getData() {
         return data;
     }
-
     public double getValor() {
         return valor;
     }
-
     public double getValorTotalImpostos() {
         return valorTotalImpostos;
     }
-
     public double getValorTotalAPagar() {
         return valorTotalAPagar;
     }
+    public List<ItemPedido> getProdutos() {
+        return produtos;
+    }
+    public double getValorTotalDescontos() {return valorTotalDescontos;}
+    public List<Imposto> getImpostos() {return impostos;}
+    public Cliente getCliente() {return cliente;}
 
+    //Adições
+    public void addItem(ItemPedido... itens) {
+        for(ItemPedido item : itens){
+            this.produtos.add(item);
+        }
+    }
+    public void addImposto(Imposto... impostos){
+        for(Imposto imposto : impostos){
+            this.impostos.add(imposto);
+        }
+    }
     public void addDescontos(double valorDesconto) {
         this.valorTotalDescontos += valorDesconto;
     }
 
-    public ArrayList<ItemPedido> getProdutos() {
-        return produtos;
-    }
-
-    public void addItem(ItemPedido item){
-        this.produtos.add(item);
-        this.valor += item.getValorTotal();
-    }
-
-    public void calcularValorTotal(){
-        this.valorTotalAPagar = this.valor + this.valorTotalImpostos - this.valorTotalDescontos;
+    //Cálculos
+    public void recalcularValores() {
+        this.valor = 0;
+        for (ItemPedido item : produtos) {
+            this.valor += item.getValorTotal();
+        }
+        this.valorTotalImpostos = 0;
+        for (Imposto imposto : impostos) {
+            this.valorTotalImpostos += (imposto.getPercentual()/100) * this.valor;
+        }
+        this.valorTotalAPagar = valor + valorTotalImpostos - this.valorTotalDescontos;
     }
 }
