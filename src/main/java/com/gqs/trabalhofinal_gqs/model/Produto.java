@@ -28,4 +28,16 @@ public class Produto {
     public String getTipo() {
         return tipo;
     }
+
+    public void vender(int quantidade) throws RuntimeException {
+        if (quantidade > this.quantidadeEmEstoque) {
+            throw new RuntimeException("Quantidade não disponível");
+        } else {
+            this.quantidadeEmEstoque -= quantidade;
+        }
+    }
+
+    public void reporEstoque(int quantidade) {
+        this.quantidadeEmEstoque += quantidade;
+    }
 }

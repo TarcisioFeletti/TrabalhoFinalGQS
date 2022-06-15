@@ -1,5 +1,7 @@
 package com.gqs.trabalhofinal_gqs.model;
 
+import com.gqs.trabalhofinal_gqs.collection.ProdutosCollection;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +17,8 @@ public class Pedido {
     private List<Imposto> impostos;
     private Cliente cliente;
 
-    public Pedido(int numero, LocalDateTime data, Cliente cliente) {
-        this.numero = numero;
+    public Pedido(LocalDateTime data, Cliente cliente) {
+        this.numero = NumeroDePedidos.getNumero();
         this.data = data;
         this.produtos = new ArrayList<>();
         this.impostos = new ArrayList<>();
@@ -52,7 +54,12 @@ public class Pedido {
     //Adições
     public void addItem(ItemPedido... itens) {
         for(ItemPedido item : itens){
-            this.produtos.add(item);
+            try {
+                this.produtos.add(item);
+                ProdutosCollection.getInstancia().vender(item.getItem().getNome(), item.getQuantidade());
+            }catch(RuntimeException e){
+                System.out.println(e.getMessage());
+            }
         }
     }
     public void addImposto(Imposto... impostos){
@@ -75,5 +82,16 @@ public class Pedido {
             this.valorTotalImpostos += (imposto.getPercentual()/100) * this.valor;
         }
         this.valorTotalAPagar = valor + valorTotalImpostos - this.valorTotalDescontos;
+    }
+
+    public void removerItens(ItemPedido... itens){
+        for(ItemPedido item : itens){
+            try {
+                this.produtos.remove(item);
+                ProdutosCollection.getInstancia().reporEstoque(item.getItem().getNome(), item.getQuantidade());
+            }catch(RuntimeException e){
+                System.out.println(e.getMessage());
+            }
+        }
     }
 }

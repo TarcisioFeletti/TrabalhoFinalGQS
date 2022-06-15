@@ -1,6 +1,8 @@
+import com.gqs.trabalhofinal_gqs.collection.ProdutosCollection;
 import com.gqs.trabalhofinal_gqs.model.*;
 import com.gqs.trabalhofinal_gqs.model.descontos.ProcessaDesconto;
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -14,12 +16,13 @@ class TesteEstruturasBásicas {
     public TesteEstruturasBásicas() {
     }
 
+
     private Cliente cliente = new Cliente("Tarcisio");
     private Produto lapis = new Produto("Lapis", 10, 2.50,"papelaria");
 
-    private Pedido pedido = new Pedido(1, LocalDateTime.now(), cliente);
+    private Pedido pedido = new Pedido(LocalDateTime.now(), cliente);
 
-    private ItemPedido item = new ItemPedido(pedido, lapis, 2);
+    private ItemPedido item = new ItemPedido(pedido, lapis, 2);;
 
     private Imposto imposto = new Imposto("icms", 3);
 
@@ -88,27 +91,10 @@ class TesteEstruturasBásicas {
         assertThat(pedido.getProdutos(), instanceOf(List.class));
         assertThat(pedido.getImpostos(), instanceOf(List.class));
         assertThat(pedido.getCliente(), instanceOf(Cliente.class));
-        assertThat(pedido.getNumero(), equalTo(1));
         assertThat(pedido.getValor(), equalTo(0.0));
         assertThat(pedido.getValorTotalImpostos(), equalTo(0.0));
         assertThat(pedido.getValorTotalDescontos(), equalTo(0.0));
         assertThat(pedido.getValorTotalAPagar(), equalTo(0.0));
-
-        //Colocando valores dos objetos para o calculo dos valores
-        double esperado = 115.075;
-        pedido.addItem(item);
-        pedido.addImposto(imposto);
-        processadora.calculaDesconto();
-        pedido.recalcularValores();
-
-        //Testando os novos valores
-        assertThat(pedido.getProdutos().get(0), allOf(is(item), instanceOf(ItemPedido.class)));
-        assertThat(pedido.getImpostos().get(0), allOf(is(imposto), instanceOf(Imposto.class)));
-        assertThat(pedido.getCliente(), allOf(is(cliente), instanceOf(Cliente.class)));
-        assertThat(pedido.getValor(), equalTo(5.0));
-        assertThat(pedido.getValorTotalImpostos(), equalTo(0.15));
-        assertThat(pedido.getValorTotalDescontos(), equalTo(0.075));
-        assertThat(pedido.getValorTotalAPagar(), equalTo(5.075));
     }
 
     @Test
