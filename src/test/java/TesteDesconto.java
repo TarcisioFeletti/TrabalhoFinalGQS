@@ -1,5 +1,7 @@
+import com.gqs.trabalhofinal_gqs.collection.ProdutosCollection;
 import com.gqs.trabalhofinal_gqs.model.*;
 import com.gqs.trabalhofinal_gqs.model.descontos.*;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -9,19 +11,26 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 class TesteDesconto {
-    private Produto lapis = new Produto("Lapis", 10, 2.50,"papelaria");
-    private Produto mochila = new Produto("Mochila", 5, 100,"mochila");
-    private Produto caderno = new Produto("Caderno", 2, 10,"papelaria");
+    private static Produto lapis = new Produto("Lapis", 10, 2.50,"papelaria");
+    private static Produto mochila = new Produto("Mochila", 5, 100,"mochila");
+    private static Produto caderno = new Produto("Caderno", 2, 10,"papelaria");
 
-    private Pedido pedido = new Pedido(1, LocalDateTime.now(), new Cliente("Tarcisio"));
+    private static Pedido pedido = new Pedido(LocalDateTime.now(), new Cliente("Tarcisio"));
 
-    private ItemPedido item1 = new ItemPedido(pedido, lapis, 2);
-    private ItemPedido item2 = new ItemPedido(pedido, mochila, 1);
-    private ItemPedido item3 = new ItemPedido(pedido, caderno, 1);
+    private static ItemPedido item1 = new ItemPedido(pedido, lapis, 2);
+    private static ItemPedido item2 = new ItemPedido(pedido, mochila, 1);
+    private static ItemPedido item3 = new ItemPedido(pedido, caderno, 1);
 
-    private Imposto ICMS = new Imposto("icms", 3);
+    private static Imposto ICMS = new Imposto("icms", 3);
 
-    private ProcessaDesconto processadora = new ProcessaDesconto(pedido);
+    private static ProcessaDesconto processadora = new ProcessaDesconto(pedido);
+
+    @BeforeAll
+    public static void antes(){
+        ProdutosCollection.getInstancia().addProduto(lapis);
+        ProdutosCollection.getInstancia().addProduto(mochila);
+        ProdutosCollection.getInstancia().addProduto(caderno);
+    }
 
     public TesteDesconto(){}
 
