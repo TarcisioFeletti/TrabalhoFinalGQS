@@ -72,9 +72,9 @@ public class ProdutosCollection {
                 if (produto != null) {
                     produto.vender(quantidade);
                     vendeu = true;
-                }
-                if (produto.getQuantidadeEmEstoque() == 0) {
-                    removeProduto(produto.getNome());
+                    if (produto.getQuantidadeEmEstoque() == 0) {
+                        removeProduto(produto.getNome());
+                    }
                 }
             } catch (RuntimeException e) {
                 throw e;
