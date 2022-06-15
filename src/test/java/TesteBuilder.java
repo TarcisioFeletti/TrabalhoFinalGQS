@@ -20,31 +20,31 @@ public class TesteBuilder {
 
     @BeforeAll
     public static void antes() {
-        estoque.addProduto(new Produto("Carne", 20, 30, "Comida"));
-        estoque.addProduto(new Produto("Leite", 20, 30, "Comida"));
-        estoque.addProduto(new Produto("Ovo", 20, 30, "Comida"));
-        estoque.addProduto(new Produto("Arroz", 20, 30, "Comida"));
-        estoque.addProduto(new Produto("Feijão", 20, 30, "Comida"));
-        estoque.addProduto(new Produto("Canjica", 20, 30, "Comida"));
-        estoque.addProduto(new Produto("Trigo", 20, 30, "Comida"));
-        estoque.addProduto(new Produto("Açucar", 20, 30, "Comida"));
-        estoque.addProduto(new Produto("Cafe", 20, 30, "Comida"));
-        estoque.addProduto(new Produto("Oleo", 20, 30, "Comida"));
-        estoque.addProduto(new Produto("Maça", 20, 30, "Comida"));
-        estoque.addProduto(new Produto("Laranja", 20, 30, "Comida"));
-        estoque.addProduto(new Produto("Banana", 20, 30, "Comida"));
-        estoque.addProduto(new Produto("Arroz", 20, 30, "Comida"));
-        estoque.addProduto(new Produto("Feijao", 20, 30, "Comida"));
-        estoque.addProduto(new Produto("Manteiga", 20, 30, "Comida"));
-        estoque.addProduto(new Produto("Tomate", 20, 30, "Comida"));
-        estoque.addProduto(new Produto("Pao", 20, 30, "Comida"));
-        estoque.addProduto(new Produto("Batata", 20, 30, "Comida"));
+        estoque.addProduto(new Produto("Carne", 40, 30, "Comida"));
+        estoque.addProduto(new Produto("Leite", 40, 30, "Comida"));
+        estoque.addProduto(new Produto("Ovo", 40, 30, "Comida"));
+        estoque.addProduto(new Produto("Arroz", 40, 30, "Comida"));
+        estoque.addProduto(new Produto("Feijão", 40, 30, "Comida"));
+        estoque.addProduto(new Produto("Canjica", 40, 30, "Comida"));
+        estoque.addProduto(new Produto("Trigo", 40, 30, "Comida"));
+        estoque.addProduto(new Produto("Açucar", 40, 30, "Comida"));
+        estoque.addProduto(new Produto("Cafe", 40, 30, "Comida"));
+        estoque.addProduto(new Produto("Oleo", 40, 30, "Comida"));
+        estoque.addProduto(new Produto("Maça", 40, 30, "Comida"));
+        estoque.addProduto(new Produto("Laranja", 40, 30, "Comida"));
+        estoque.addProduto(new Produto("Banana", 40, 30, "Comida"));
+        estoque.addProduto(new Produto("Arroz", 40, 30, "Comida"));
+        estoque.addProduto(new Produto("Feijao", 40, 30, "Comida"));
+        estoque.addProduto(new Produto("Manteiga", 40, 30, "Comida"));
+        estoque.addProduto(new Produto("Tomate", 40, 30, "Comida"));
+        estoque.addProduto(new Produto("Pao", 40, 30, "Comida"));
+        estoque.addProduto(new Produto("Batata", 40, 30, "Comida"));
 
     }
 
     @Test
     @DisplayName("Cesta Básica economica")
-    public void CT001() {
+    void CT001() {
         CestaBasicaBuilder builder = new CestaBasicaBuilder(cliente);
         DiretorBuilder diretor = new DiretorBuilder(builder);
 
@@ -60,7 +60,7 @@ public class TesteBuilder {
 
     @Test
     @DisplayName("Cesta Básica Premium")
-    public void CT002() {
+    void CT002() {
         CestaBasicaBuilder builder = new CestaBasicaBuilder(cliente);
         DiretorBuilder diretor = new DiretorBuilder(builder);
 

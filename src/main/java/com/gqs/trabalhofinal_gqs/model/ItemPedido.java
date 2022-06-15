@@ -1,7 +1,5 @@
 package com.gqs.trabalhofinal_gqs.model;
 
-import org.jetbrains.annotations.NotNull;
-
 public class ItemPedido {
     private Pedido pedido;
     private Produto item;
