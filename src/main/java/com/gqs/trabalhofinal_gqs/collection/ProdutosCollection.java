@@ -45,7 +45,7 @@ public class ProdutosCollection {
                     return produto;
                 }
             }
-            throw lancaExcecaoProduto(nome);
+            return null;
         }
     }
 
@@ -69,8 +69,10 @@ public class ProdutosCollection {
         } else {
             try {
                 Produto produto = getProduto(nome);
-                produto.vender(quantidade);
-                vendeu = true;
+                if (produto != null) {
+                    produto.vender(quantidade);
+                    vendeu = true;
+                }
                 if (produto.getQuantidadeEmEstoque() == 0) {
                     removeProduto(produto.getNome());
                 }
