@@ -1,15 +1,15 @@
 package com.gqs.trabalhofinal_gqs.model.descontos;
 
 import com.gqs.trabalhofinal_gqs.model.ItemPedido;
-import com.gqs.trabalhofinal_gqs.model.Pedido;
+import com.gqs.trabalhofinal_gqs.model.state.Contexto;
 
 import java.util.ArrayList;
 
 public class ProcessaDesconto {
-    private Pedido pedido;
+    private Contexto pedido;
     private ArrayList<IDesconto> descontos;
 
-    public ProcessaDesconto(Pedido pedido) {
+    public ProcessaDesconto(Contexto pedido) {
         this.pedido = pedido;
         descontos = new ArrayList<>();
         descontos.add(new DescontoNatal());

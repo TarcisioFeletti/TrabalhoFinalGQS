@@ -3,21 +3,21 @@ package com.gqs.trabalhofinal_gqs.model.builder;
 import com.gqs.trabalhofinal_gqs.collection.ProdutosCollection;
 import com.gqs.trabalhofinal_gqs.model.Cliente;
 import com.gqs.trabalhofinal_gqs.model.ItemPedido;
-import com.gqs.trabalhofinal_gqs.model.Pedido;
+import com.gqs.trabalhofinal_gqs.model.state.Contexto;
 
 import java.time.LocalDateTime;
 
 public class CestaBasicaBuilder implements IPedidoBuilder {
 
-    private Pedido pedido;
+    private Contexto pedido;
 
     public CestaBasicaBuilder(Cliente cliente) {
-        this.pedido = new Pedido(LocalDateTime.now(), cliente);
+        this.pedido = new Contexto(LocalDateTime.now(), cliente);
     }
 
     @Override
     public void reset() {
-        this.pedido = new Pedido(LocalDateTime.now(), pedido.getCliente());
+        this.pedido = new Contexto(LocalDateTime.now(), pedido.getCliente());
     }
 
     @Override
@@ -60,7 +60,7 @@ public class CestaBasicaBuilder implements IPedidoBuilder {
     }
 
     @Override
-    public Pedido getPedido() {
+    public Contexto getPedido() {
         return this.pedido;
     }
 

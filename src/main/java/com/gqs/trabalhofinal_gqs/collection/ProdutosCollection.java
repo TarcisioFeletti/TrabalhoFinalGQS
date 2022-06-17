@@ -87,6 +87,7 @@ public class ProdutosCollection {
 
 
     public void reporEstoque(String nome, int quantidade) throws RuntimeException {
+        boolean existe = false;
         if (produtos.isEmpty()) {
             throw lancaExcecaoVazio();
         } else {
@@ -94,12 +95,15 @@ public class ProdutosCollection {
                 if (nome.equalsIgnoreCase(produto.getNome())) {
                     try {
                         produto.reporEstoque(quantidade);
+                        existe = true;
                     } catch (RuntimeException e) {
                         throw e;
                     }
                 }
             }
-            throw new RuntimeException("Esse produto não existe");
+            if (!existe) {
+                throw new RuntimeException("Esse produto não existe");
+            }
         }
     }
 }

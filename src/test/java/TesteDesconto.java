@@ -1,6 +1,7 @@
 import com.gqs.trabalhofinal_gqs.collection.ProdutosCollection;
 import com.gqs.trabalhofinal_gqs.model.*;
 import com.gqs.trabalhofinal_gqs.model.descontos.*;
+import com.gqs.trabalhofinal_gqs.model.state.Contexto;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,7 +16,7 @@ class TesteDesconto {
     private static Produto mochila = new Produto("Mochila", 5, 100,"mochila");
     private static Produto caderno = new Produto("Caderno", 2, 10,"papelaria");
 
-    private static Pedido pedido = new Pedido(LocalDateTime.now(), new Cliente("Tarcisio"));
+    private static Contexto pedido = new Contexto(LocalDateTime.now(), new Cliente("Tarcisio"));
 
     private static ItemPedido item1 = new ItemPedido(pedido, lapis, 2);
     private static ItemPedido item2 = new ItemPedido(pedido, mochila, 1);
