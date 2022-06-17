@@ -1,8 +1,6 @@
-import com.gqs.trabalhofinal_gqs.collection.ProdutosCollection;
 import com.gqs.trabalhofinal_gqs.model.*;
 import com.gqs.trabalhofinal_gqs.model.descontos.ProcessaDesconto;
-import org.hamcrest.Matchers;
-import org.junit.jupiter.api.BeforeAll;
+import com.gqs.trabalhofinal_gqs.model.state.Contexto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +18,7 @@ class TesteEstruturasBásicas {
     private Cliente cliente = new Cliente("Tarcisio");
     private Produto lapis = new Produto("Lapis", 10, 2.50,"papelaria");
 
-    private Pedido pedido = new Pedido(LocalDateTime.now(), cliente);
+    private Contexto pedido = new Contexto(LocalDateTime.now(), cliente);
 
     private ItemPedido item = new ItemPedido(pedido, lapis, 2);;
 
@@ -64,7 +62,7 @@ class TesteEstruturasBásicas {
         //Teste da criação do objeto
         assertThat(item, instanceOf(ItemPedido.class));
         //Teste dos métodos
-        assertThat(item.getPedido(), allOf(is(pedido), instanceOf(Pedido.class)));
+        assertThat(item.getPedido(), allOf(is(pedido), instanceOf(Contexto.class)));
         assertThat(item.getItem(), allOf(is(lapis), instanceOf(Produto.class)));
         assertThat(item.getQuantidade(), equalTo(2));
         assertThat(item.getValorUnitario(), equalTo(2.50));
@@ -85,7 +83,7 @@ class TesteEstruturasBásicas {
         assertThat(pedido, hasProperty("impostos"));
         assertThat(pedido, hasProperty("cliente"));
         //Teste da criação do objeto
-        assertThat(pedido, instanceOf(Pedido.class));
+        assertThat(pedido, instanceOf(Contexto.class));
         //Teste dos métodos
         assertThat(pedido.getData(), instanceOf(LocalDateTime.class));
         assertThat(pedido.getProdutos(), instanceOf(List.class));
@@ -112,6 +110,22 @@ class TesteEstruturasBásicas {
         assertThat(lapis.getTipo(), equalTo("papelaria"));
         assertThat(lapis.getPrecoUnitario(), equalTo(2.5));
         assertThat(lapis.getQuantidadeEmEstoque(), equalTo(10));
+    }
+
+    @Test
+    @DisplayName("Estruturas de Avaliação")
+    void CT006(){
+        int nota = 5;
+        String descricao = "Descrição genérica";
+        Avaliacao avaliacao = new Avaliacao(nota, descricao);
+        //Teste de propriedades
+        assertThat(avaliacao, hasProperty("nota"));
+        assertThat(avaliacao, hasProperty("descricao"));
+        //Teste da criação do objeto
+        assertThat(avaliacao, instanceOf(Avaliacao.class));
+        //Teste dos métodos
+        assertThat(avaliacao.getNota(), equalTo(5));
+        assertThat(avaliacao.getDescricao(), equalTo("Descrição genérica"));
     }
 
 }

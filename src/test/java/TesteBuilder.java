@@ -1,6 +1,6 @@
 import com.gqs.trabalhofinal_gqs.collection.ProdutosCollection;
 import com.gqs.trabalhofinal_gqs.model.Cliente;
-import com.gqs.trabalhofinal_gqs.model.Pedido;
+import com.gqs.trabalhofinal_gqs.model.state.Contexto;
 import com.gqs.trabalhofinal_gqs.model.Produto;
 import com.gqs.trabalhofinal_gqs.model.builder.CestaBasicaBuilder;
 import com.gqs.trabalhofinal_gqs.model.builder.DiretorBuilder;
@@ -50,7 +50,7 @@ public class TesteBuilder {
 
         diretor.make("Economica");
 
-        Pedido pedido = builder.getPedido();
+        Contexto pedido = builder.getPedido();
         pedido.recalcularValores();
 
         double precoEsperado = (5 * 30) + (3 * 30) + (12 * 30) + (10 * 30) + (5 * 30) + (3 * 30) + (3 * 30) + (5 * 30) + (3 * 30) + (3 * 30) + (6 * 30) + (12 * 30) + (12 * 30);
@@ -66,7 +66,7 @@ public class TesteBuilder {
 
         diretor.make("Premium");
 
-        Pedido pedido = builder.getPedido();
+        Contexto pedido = builder.getPedido();
         pedido.recalcularValores();
 
         double precoEsperado = (5 * 30) + (3 * 30) + (12 * 30) + (10 * 30) + (5 * 30) + (3 * 30) + (3 * 30) + (5 * 30) + (3 * 30) + (3 * 30) + (6 * 30) + (12 * 30) + (12 * 30) + (30 * 22);

@@ -1,6 +1,6 @@
 package com.gqs.trabalhofinal_gqs.model.builder;
 
-import com.gqs.trabalhofinal_gqs.model.Pedido;
+import com.gqs.trabalhofinal_gqs.model.state.Contexto;
 
 public interface IPedidoBuilder {
     void reset();
@@ -9,5 +9,5 @@ public interface IPedidoBuilder {
     void addProdutosIndustrializados();
     void addLegumesEFrutas();
     void addProdutosPremium();
-    Pedido getPedido();
+    Contexto getPedido();
 }

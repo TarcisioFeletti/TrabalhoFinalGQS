@@ -1,12 +1,17 @@
-package com.gqs.trabalhofinal_gqs.model;
+package com.gqs.trabalhofinal_gqs.model.state;
 
 import com.gqs.trabalhofinal_gqs.collection.ProdutosCollection;
+import com.gqs.trabalhofinal_gqs.model.Cliente;
+import com.gqs.trabalhofinal_gqs.model.Imposto;
+import com.gqs.trabalhofinal_gqs.model.ItemPedido;
+import com.gqs.trabalhofinal_gqs.model.NumeroDePedidos;
+import com.gqs.trabalhofinal_gqs.model.descontos.ProcessaDesconto;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Pedido {
+public class Contexto {
     private int numero;
     private LocalDateTime data;
     private double valor;
@@ -16,8 +21,9 @@ public class Pedido {
     private List<ItemPedido> produtos;
     private List<Imposto> impostos;
     private Cliente cliente;
+    private State estado;
 
-    public Pedido(LocalDateTime data, Cliente cliente) {
+    public Contexto(LocalDateTime data, Cliente cliente) {
         this.numero = NumeroDePedidos.getNumero();
         this.data = data;
         this.produtos = new ArrayList<>();
@@ -26,6 +32,7 @@ public class Pedido {
         this.valorTotalImpostos = 0;
         this.valorTotalDescontos = 0;
         this.cliente = cliente;
+        estado = new NovoState(this);
     }
 
     //Gets
@@ -50,6 +57,12 @@ public class Pedido {
     public double getValorTotalDescontos() {return valorTotalDescontos;}
     public List<Imposto> getImpostos() {return impostos;}
     public Cliente getCliente() {return cliente;}
+    public State getEstado() {
+        return estado;
+    }
+    public void changeEstado(State estado) {
+        this.estado = estado;
+    }
 
     //Adições
     public void addItem(ItemPedido... itens) {
@@ -69,6 +82,11 @@ public class Pedido {
     }
     public void addDescontos(double valorDesconto) {
         this.valorTotalDescontos += valorDesconto;
+    }
+
+    public void calcularDescontos(){
+        ProcessaDesconto processadora = new ProcessaDesconto(this);
+        processadora.calculaDesconto();
     }
 
     //Cálculos
@@ -92,6 +110,12 @@ public class Pedido {
             }catch(RuntimeException e){
                 System.out.println(e.getMessage());
             }
+        }
+    }
+
+    public void cancelar(){
+        for(ItemPedido item : produtos){
+            ProdutosCollection.getInstancia().reporEstoque(item.getItem().getNome(), item.getQuantidade());
         }
     }
 }

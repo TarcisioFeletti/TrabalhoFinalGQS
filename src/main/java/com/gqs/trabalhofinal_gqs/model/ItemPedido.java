@@ -1,13 +1,15 @@
 package com.gqs.trabalhofinal_gqs.model;
 
+import com.gqs.trabalhofinal_gqs.model.state.Contexto;
+
 public class ItemPedido {
-    private Pedido pedido;
+    private Contexto pedido;
     private Produto item;
     private int quantidade;
     private double valorUnitario;
     private double valorTotal;
 
-    public ItemPedido(Pedido pedido, Produto item, int quantidade) {
+    public ItemPedido(Contexto pedido, Produto item, int quantidade) {
         this.pedido = pedido;
         this.item = item;
         this.quantidade = quantidade;
@@ -15,7 +17,7 @@ public class ItemPedido {
         this.valorTotal = this.quantidade * this.valorUnitario;
     }
 
-    public Pedido getPedido() {
+    public Contexto getPedido() {
         return pedido;
     }
 
