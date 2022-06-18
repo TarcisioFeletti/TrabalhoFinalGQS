@@ -14,6 +14,11 @@ public class CanceladoPeloEstabelecimentoState extends State{
 
     @Override
     public void cancelar() {
+        throw new UnsupportedOperationException("Operação não suportada");
+    }
 
+    @Override
+    public String toString() {
+        return "Pedido cancelado pelo estabelecimento";
     }
 }

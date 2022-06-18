@@ -12,6 +12,10 @@ public class EmRotaDeEntregaState extends State{
 
     @Override
     public void cancelar(){
-        System.out.println("Impossível cancelar");
+        throw new UnsupportedOperationException("Operação não suportada");
+    }
+    @Override
+    public String toString() {
+        return "Pedido em rota de entrega";
     }
 }

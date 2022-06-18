@@ -36,4 +36,8 @@ public class ItemPedido {
     public double getValorTotal() {
         return valorTotal;
     }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
 }

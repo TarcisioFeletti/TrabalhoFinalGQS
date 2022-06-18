@@ -9,10 +9,14 @@ public class EntregueState extends State{
     public EntregueState(Contexto contexto) {
         super(contexto);
     }
-
     @Override
-    public void avancar() {}
-
+    public void avancar() {throw new UnsupportedOperationException("Operação não suportada");}
     @Override
-    public void cancelar() {}
+    public void cancelar() {
+        throw new UnsupportedOperationException("Operação não suportada");
+    }
+    @Override
+    public String toString() {
+        return "Pedido entregue";
+    }
 }
