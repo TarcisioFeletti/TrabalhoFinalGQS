@@ -6,7 +6,8 @@ public class ReembolsadoState extends State{
     }
 
     @Override
-    public String toString() {
-        return "Pedido reembolsado";
-    }
+    public void avancar() {}
+
+    @Override
+    public void cancelar() {}
 }
