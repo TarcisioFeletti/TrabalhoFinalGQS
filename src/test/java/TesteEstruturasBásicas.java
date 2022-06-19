@@ -23,18 +23,22 @@ class TesteEstruturasBásicas {
 
 
     private static Cliente cliente = new Cliente("Tarcisio");
+
+    private Avaliacao avaliacao = new Avaliacao(5, "Descrição generica", pedido);
     private static Produto lapis = new Produto("Lapis", 10, 2.50, "papelaria");
 
+    private static Produto caderno = new Produto("Caderno", 5, 10, "Papelaria");
     private static Contexto pedido = new Contexto(LocalDateTime.now(), cliente);
 
     private static ItemPedido item = new ItemPedido(pedido, lapis, 2);
-    ;
+    private static ItemPedido item1 = new ItemPedido(pedido, caderno, 2);
 
     private ProcessaDesconto processadora = new ProcessaDesconto(pedido);
 
     @BeforeAll
     static void antes() {
         ProdutosCollection.getInstancia().addProduto(lapis);
+        ProdutosCollection.getInstancia().addProduto(caderno);
     }
 
     @Test
@@ -63,6 +67,8 @@ class TesteEstruturasBásicas {
         assertThat(item.getPedido(), allOf(is(pedido), instanceOf(Contexto.class)));
         assertThat(item.getItem(), allOf(is(lapis), instanceOf(Produto.class)));
         assertThat(item.getQuantidade(), equalTo(2));
+        item.setQuantidade(3);
+        assertThat(item.getQuantidade(), equalTo(3));
         assertThat(item.getValorUnitario(), equalTo(2.50));
         assertThat(item.getValorTotal(), equalTo(5.0));
     }
@@ -90,10 +96,21 @@ class TesteEstruturasBásicas {
         assertThat(pedido.getValorTotalDescontos(), equalTo(0.0));
         assertThat(pedido.getValorTotalAPagar(), equalTo(0.0));
 
-        pedido.addItem(item);
+        pedido.addItem(item1);
         assertThat(pedido.getProdutos().size(), equalTo(1));
-        pedido.removerItens(item);
+        pedido.removerItens(item1);
         assertThat(pedido.getProdutos().size(), equalTo(0));
+        pedido.addItem(item1);
+        try {
+            pedido.removerItens(new ItemPedido(pedido, caderno, 100));
+        }catch(RuntimeException e){
+            assertThat(e, instanceOf(RuntimeException.class));
+            assertThat(e.getMessage(), equalTo("Quantidade não suportada"));
+        }
+        pedido.addItem(item1);
+        pedido.removerItens(new ItemPedido(pedido, caderno, 1));
+        assertThat(pedido.getProdutos().size(), equalTo(1));
+        //pedido.addItem(item1);
     }
 
     @Test
@@ -111,14 +128,17 @@ class TesteEstruturasBásicas {
         assertThat(lapis.getTipo(), equalTo("papelaria"));
         assertThat(lapis.getPrecoUnitario(), equalTo(2.5));
         assertThat(lapis.getQuantidadeEmEstoque(), equalTo(10));
+        try{
+            lapis.vender(200);
+        }catch(RuntimeException e){
+            assertThat(e, instanceOf(RuntimeException.class));
+            assertThat(e.getMessage(), equalTo("Quantidade não disponível"));
+        }
     }
 
     @Test
     @DisplayName("Estruturas de Avaliação")
     void CT006() {
-        int nota = 5;
-        String descricao = "Descrição genérica";
-        Avaliacao avaliacao = new Avaliacao(nota, descricao, pedido);
         //Teste de propriedades
         assertThat(avaliacao, hasProperty("nota"));
         assertThat(avaliacao, hasProperty("descricao"));
@@ -126,24 +146,23 @@ class TesteEstruturasBásicas {
         assertThat(avaliacao, instanceOf(Avaliacao.class));
         //Teste dos métodos
         assertThat(avaliacao.getNota(), equalTo(5));
-        assertThat(avaliacao.getDescricao(), equalTo("Descrição genérica"));
+        assertThat(avaliacao.getDescricao(), equalTo("Descrição generica"));
+        assertThat(avaliacao.getPedido(), samePropertyValuesAs(pedido));
     }
 
     @Test
     @DisplayName("Estruturas de Avaliação Collection")
     void CT007() {
-        int nota = 5;
-        String descricao = "Descrição genérica";
-        Avaliacao avaliacao = new Avaliacao(nota, descricao, pedido);
+        Avaliacao avalia = new Avaliacao(avaliacao);
         AvaliacoesCollection avaliacoes = AvaliacoesCollection.getInstancia();
-        avaliacoes.addAvaliacao(avaliacao);
+        avaliacoes.addAvaliacao(avalia);
         //Teste de propriedades
         assertThat(avaliacoes, hasProperty("avaliacoes"));
         //Teste da criação do objeto
         assertThat(avaliacoes, instanceOf(AvaliacoesCollection.class));
         //Teste dos métodos
         assertThat(avaliacoes, samePropertyValuesAs(AvaliacoesCollection.getInstancia()));
-        assertThat(avaliacoes.getAvaliacoes(), hasItem(avaliacao));
+        assertThat(avaliacoes.getAvaliacoes(), hasItem(avalia));
     }
 
     @Test

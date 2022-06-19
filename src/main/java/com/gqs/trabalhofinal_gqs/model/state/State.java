@@ -10,6 +10,15 @@ public abstract class State implements IState{
     public Contexto getContexto() {
         return contexto;
     }
+
+    @Override
+    public void avancar(){
+        throw new UnsupportedOperationException("Operação não suportada");
+    }
+    @Override
+    public void cancelar(){
+        throw new UnsupportedOperationException("Operação não suportada");
+    }
     @Override
     public abstract String toString();
 }

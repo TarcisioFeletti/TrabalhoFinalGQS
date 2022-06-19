@@ -11,10 +11,6 @@ public class CanceladoPeloClienteState extends State{
     public void avancar() {
         super.getContexto().changeEstado(new ReembolsadoState(super.getContexto()));
     }
-
-    @Override
-    public void cancelar() {throw new UnsupportedOperationException("Operação não suportada");}
-
     @Override
     public String toString() {
         return "Pedido cancelado pelo cliente";
