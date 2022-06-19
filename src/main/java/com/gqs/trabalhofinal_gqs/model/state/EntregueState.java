@@ -9,10 +9,8 @@ public class EntregueState extends State{
     public EntregueState(Contexto contexto) {
         super(contexto);
     }
-
     @Override
-    public void avancar() {}
-
-    @Override
-    public void cancelar() {}
+    public String toString() {
+        return "Pedido entregue";
+    }
 }

@@ -1,6 +1,6 @@
 package com.gqs.trabalhofinal_gqs.model.state;
 
-public abstract class State {
+public abstract class State implements IState{
     private Contexto contexto;
 
     public State(Contexto contexto) {
@@ -11,10 +11,14 @@ public abstract class State {
         return contexto;
     }
 
-    public void setContexto(Contexto contexto) {
-        this.contexto = contexto;
+    @Override
+    public void avancar(){
+        throw new UnsupportedOperationException("Operação não suportada");
     }
-
-    public abstract void avancar();
-    public abstract void cancelar();
+    @Override
+    public void cancelar(){
+        throw new UnsupportedOperationException("Operação não suportada");
+    }
+    @Override
+    public abstract String toString();
 }

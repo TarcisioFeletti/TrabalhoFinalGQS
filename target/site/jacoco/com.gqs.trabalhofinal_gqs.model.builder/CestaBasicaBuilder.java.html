@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CestaBasicaBuilder.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TrabalhoFinal_GQS</a> &gt; <a href="index.source.html" class="el_package">com.gqs.trabalhofinal_gqs.model.builder</a> &gt; <span class="el_source">CestaBasicaBuilder.java</span></div><h1>CestaBasicaBuilder.java</h1><pre class="source lang-java linenums">package com.gqs.trabalhofinal_gqs.model.builder;
+
+import com.gqs.trabalhofinal_gqs.collection.ProdutosCollection;
+import com.gqs.trabalhofinal_gqs.model.Cliente;
+import com.gqs.trabalhofinal_gqs.model.ItemPedido;
+import com.gqs.trabalhofinal_gqs.model.state.Contexto;
+
+import java.time.LocalDateTime;
+
+public class CestaBasicaBuilder implements IPedidoBuilder {
+
+    private Contexto pedido;
+
+<span class="fc" id="L14">    public CestaBasicaBuilder(Cliente cliente) {</span>
+<span class="fc" id="L15">        this.pedido = new Contexto(LocalDateTime.now(), cliente);</span>
+<span class="fc" id="L16">    }</span>
+
+    @Override
+    public void reset() {
+<span class="fc" id="L20">        this.pedido = new Contexto(LocalDateTime.now(), pedido.getCliente());</span>
+<span class="fc" id="L21">    }</span>
+
+    @Override
+    public void addProdutosDeOrigemAnimal() {
+<span class="fc" id="L25">        this.pedido.addItem(new ItemPedido(this.pedido, ProdutosCollection.getInstancia().getProduto(&quot;Carne&quot;), 5),</span>
+<span class="fc" id="L26">                new ItemPedido(this.pedido, ProdutosCollection.getInstancia().getProduto(&quot;Leite&quot;), 3),</span>
+<span class="fc" id="L27">                new ItemPedido(this.pedido, ProdutosCollection.getInstancia().getProduto(&quot;Ovo&quot;), 12));</span>
+<span class="fc" id="L28">    }</span>
+
+    @Override
+    public void addGraos() {
+<span class="fc" id="L32">        this.pedido.addItem(new ItemPedido(this.pedido, ProdutosCollection.getInstancia().getProduto(&quot;Arroz&quot;), 10),</span>
+<span class="fc" id="L33">                new ItemPedido(this.pedido, ProdutosCollection.getInstancia().getProduto(&quot;Feijão&quot;), 5),</span>
+<span class="fc" id="L34">                new ItemPedido(this.pedido, ProdutosCollection.getInstancia().getProduto(&quot;Canjica&quot;), 3),</span>
+<span class="fc" id="L35">                new ItemPedido(this.pedido, ProdutosCollection.getInstancia().getProduto(&quot;Trigo&quot;), 3));</span>
+<span class="fc" id="L36">    }</span>
+
+    @Override
+    public void addProdutosIndustrializados() {
+<span class="fc" id="L40">        this.pedido.addItem(new ItemPedido(this.pedido, ProdutosCollection.getInstancia().getProduto(&quot;Açucar&quot;), 5),</span>
+<span class="fc" id="L41">                new ItemPedido(this.pedido, ProdutosCollection.getInstancia().getProduto(&quot;Cafe&quot;), 3),</span>
+<span class="fc" id="L42">                new ItemPedido(this.pedido, ProdutosCollection.getInstancia().getProduto(&quot;Oleo&quot;), 3));</span>
+<span class="fc" id="L43">    }</span>
+
+    @Override
+    public void addLegumesEFrutas() {
+<span class="fc" id="L47">        this.pedido.addItem(new ItemPedido(this.pedido, ProdutosCollection.getInstancia().getProduto(&quot;Maça&quot;), 6),</span>
+<span class="fc" id="L48">                new ItemPedido(this.pedido, ProdutosCollection.getInstancia().getProduto(&quot;Laranja&quot;), 12),</span>
+<span class="fc" id="L49">                new ItemPedido(this.pedido, ProdutosCollection.getInstancia().getProduto(&quot;Banana&quot;), 12));</span>
+<span class="fc" id="L50">    }</span>
+
+    @Override
+    public void addProdutosPremium() {
+<span class="fc" id="L54">        this.pedido.addItem(new ItemPedido(this.pedido, ProdutosCollection.getInstancia().getProduto(&quot;Arroz&quot;), 5),</span>
+<span class="fc" id="L55">                new ItemPedido(this.pedido, ProdutosCollection.getInstancia().getProduto(&quot;Feijão&quot;), 3),</span>
+<span class="fc" id="L56">                new ItemPedido(this.pedido, ProdutosCollection.getInstancia().getProduto(&quot;Manteiga&quot;), 1),</span>
+<span class="fc" id="L57">                new ItemPedido(this.pedido, ProdutosCollection.getInstancia().getProduto(&quot;Tomate&quot;), 5),</span>
+<span class="fc" id="L58">                new ItemPedido(this.pedido, ProdutosCollection.getInstancia().getProduto(&quot;Pao&quot;), 3),</span>
+<span class="fc" id="L59">                new ItemPedido(this.pedido, ProdutosCollection.getInstancia().getProduto(&quot;Batata&quot;), 5));</span>
+<span class="fc" id="L60">    }</span>
+
+    @Override
+    public Contexto getPedido() {
+<span class="fc" id="L64">        return this.pedido;</span>
+    }
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

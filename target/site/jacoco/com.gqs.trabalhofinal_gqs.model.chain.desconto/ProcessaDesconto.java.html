@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ProcessaDesconto.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TrabalhoFinal_GQS</a> &gt; <a href="index.source.html" class="el_package">com.gqs.trabalhofinal_gqs.model.chain.desconto</a> &gt; <span class="el_source">ProcessaDesconto.java</span></div><h1>ProcessaDesconto.java</h1><pre class="source lang-java linenums">package com.gqs.trabalhofinal_gqs.model.chain.desconto;
+
+import com.gqs.trabalhofinal_gqs.model.ItemPedido;
+import com.gqs.trabalhofinal_gqs.model.state.Contexto;
+
+import java.util.ArrayList;
+
+public class ProcessaDesconto {
+    private Contexto pedido;
+    private ArrayList&lt;IDesconto&gt; descontos;
+
+<span class="fc" id="L12">    public ProcessaDesconto(Contexto pedido) {</span>
+<span class="fc" id="L13">        this.pedido = pedido;</span>
+<span class="fc" id="L14">        descontos = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L15">        descontos.add(new DescontoNatal());</span>
+<span class="fc" id="L16">        descontos.add(new DescontoTipo());</span>
+<span class="fc" id="L17">        descontos.add(new DescontoIncentivo());</span>
+<span class="fc" id="L18">    }</span>
+    public void calculaDesconto() throws RuntimeException{
+<span class="pc bpc" id="L20" title="1 of 2 branches missed.">        if(pedido.getProdutos().isEmpty()){</span>
+<span class="nc" id="L21">            throw new RuntimeException(&quot;Não é possível calcular os descontos com um pedido vazio&quot;);</span>
+        }else{
+<span class="fc" id="L23">            double porcentagemDesconto = 0;</span>
+<span class="fc bfc" id="L24" title="All 2 branches covered.">            for(ItemPedido item : pedido.getProdutos()){</span>
+<span class="fc bfc" id="L25" title="All 2 branches covered.">                for(IDesconto desconto : descontos){</span>
+<span class="fc" id="L26">                    porcentagemDesconto += desconto.calcular(item.getItem()) / 100;</span>
+<span class="fc" id="L27">                }</span>
+<span class="fc" id="L28">                pedido.addDescontos(item.getValorTotal() * porcentagemDesconto);</span>
+<span class="fc" id="L29">                porcentagemDesconto = 0;</span>
+<span class="fc" id="L30">            }</span>
+        }
+<span class="fc" id="L32">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
