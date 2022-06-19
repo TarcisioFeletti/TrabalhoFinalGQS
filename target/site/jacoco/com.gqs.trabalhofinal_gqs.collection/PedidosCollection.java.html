@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PedidosCollection.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TrabalhoFinal_GQS</a> &gt; <a href="index.source.html" class="el_package">com.gqs.trabalhofinal_gqs.collection</a> &gt; <span class="el_source">PedidosCollection.java</span></div><h1>PedidosCollection.java</h1><pre class="source lang-java linenums">package com.gqs.trabalhofinal_gqs.collection;
+
+import com.gqs.trabalhofinal_gqs.model.state.Contexto;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class PedidosCollection {
+    private List&lt;Contexto&gt; pedidos;
+<span class="fc" id="L10">    private static PedidosCollection instancia = null;</span>
+
+<span class="fc" id="L12">    private PedidosCollection(List&lt;Contexto&gt; pedidos) {</span>
+<span class="fc" id="L13">        this.pedidos = pedidos;</span>
+<span class="fc" id="L14">    }</span>
+
+    public static PedidosCollection getInstancia() {
+<span class="pc bpc" id="L17" title="1 of 2 branches missed.">        if (instancia == null) {</span>
+<span class="fc" id="L18">            instancia = new PedidosCollection(new ArrayList&lt;Contexto&gt;());</span>
+        }
+<span class="fc" id="L20">        return instancia;</span>
+    }
+
+    public void addPedido(Contexto pedido){
+<span class="fc" id="L24">        this.pedidos.add(pedido);</span>
+<span class="fc" id="L25">    }</span>
+
+    public List&lt;Contexto&gt; getAll(){
+<span class="fc" id="L28">        return pedidos;</span>
+    }
+
+    public Contexto getPedido(int valor) throws RuntimeException{
+<span class="fc bfc" id="L32" title="All 2 branches covered.">        if (pedidos.isEmpty()) {</span>
+<span class="fc" id="L33">            throw new RuntimeException(&quot;Não existe nenhum pedido&quot;);</span>
+        } else {
+<span class="fc bfc" id="L35" title="All 2 branches covered.">            for (Contexto pedido : pedidos) {</span>
+<span class="fc bfc" id="L36" title="All 2 branches covered.">                if (valor == pedido.getNumero()) {</span>
+<span class="fc" id="L37">                    return pedido;</span>
+                }
+<span class="fc" id="L39">            }</span>
+<span class="fc" id="L40">            throw new RuntimeException(&quot;Esse pedido não está listado&quot;);</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

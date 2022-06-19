@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Main.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TrabalhoFinal_GQS</a> &gt; <a href="index.source.html" class="el_package">com.gqs.trabalhofinal_gqs.controller</a> &gt; <span class="el_source">Main.java</span></div><h1>Main.java</h1><pre class="source lang-java linenums">package com.gqs.trabalhofinal_gqs.controller;
+
+import com.gqs.trabalhofinal_gqs.collection.AvaliacoesCollection;
+import com.gqs.trabalhofinal_gqs.collection.PedidosCollection;
+import com.gqs.trabalhofinal_gqs.collection.ProdutosCollection;
+import com.gqs.trabalhofinal_gqs.model.Avaliacao;
+import com.gqs.trabalhofinal_gqs.model.Cliente;
+import com.gqs.trabalhofinal_gqs.model.ItemPedido;
+import com.gqs.trabalhofinal_gqs.model.Produto;
+import com.gqs.trabalhofinal_gqs.model.builder.CestaBasicaBuilder;
+import com.gqs.trabalhofinal_gqs.model.builder.DiretorBuilder;
+import com.gqs.trabalhofinal_gqs.model.state.Contexto;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+<span class="nc" id="L19">public class Main {</span>
+
+    public static void main(String args[]) {
+<span class="nc" id="L22">        Scanner sc = new Scanner(System.in);</span>
+<span class="nc" id="L23">        int opcao = 0;</span>
+        //Produtos adicionados para os testes (preços não condizentes com a realidade, usados somente para testes)
+<span class="nc" id="L25">        ProdutosCollection estoque = ProdutosCollection.getInstancia();</span>
+<span class="nc" id="L26">        String comida = &quot;Comida&quot;;</span>
+<span class="nc" id="L27">        estoque.addProduto(new Produto(&quot;Lapis&quot;, 10, 1.50, &quot;Papelaria&quot;));</span>
+<span class="nc" id="L28">        estoque.addProduto(new Produto(&quot;Caderno&quot;, 10, 10.99, &quot;Papelaria&quot;));</span>
+<span class="nc" id="L29">        estoque.addProduto(new Produto(&quot;Carne&quot;, 40, 30, comida));</span>
+<span class="nc" id="L30">        estoque.addProduto(new Produto(&quot;Leite&quot;, 40, 30, comida));</span>
+<span class="nc" id="L31">        estoque.addProduto(new Produto(&quot;Ovo&quot;, 40, 30, comida));</span>
+<span class="nc" id="L32">        estoque.addProduto(new Produto(&quot;Arroz&quot;, 40, 30, comida));</span>
+<span class="nc" id="L33">        estoque.addProduto(new Produto(&quot;Feijão&quot;, 40, 30, comida));</span>
+<span class="nc" id="L34">        estoque.addProduto(new Produto(&quot;Canjica&quot;, 40, 30, comida));</span>
+<span class="nc" id="L35">        estoque.addProduto(new Produto(&quot;Trigo&quot;, 40, 30, comida));</span>
+<span class="nc" id="L36">        estoque.addProduto(new Produto(&quot;Açucar&quot;, 40, 30, comida));</span>
+<span class="nc" id="L37">        estoque.addProduto(new Produto(&quot;Cafe&quot;, 40, 30, comida));</span>
+<span class="nc" id="L38">        estoque.addProduto(new Produto(&quot;Oleo&quot;, 40, 30, comida));</span>
+<span class="nc" id="L39">        estoque.addProduto(new Produto(&quot;Maça&quot;, 40, 30, comida));</span>
+<span class="nc" id="L40">        estoque.addProduto(new Produto(&quot;Laranja&quot;, 40, 30, comida));</span>
+<span class="nc" id="L41">        estoque.addProduto(new Produto(&quot;Banana&quot;, 40, 30, comida));</span>
+<span class="nc" id="L42">        estoque.addProduto(new Produto(&quot;Arroz&quot;, 40, 30, comida));</span>
+<span class="nc" id="L43">        estoque.addProduto(new Produto(&quot;Feijao&quot;, 40, 30, comida));</span>
+<span class="nc" id="L44">        estoque.addProduto(new Produto(&quot;Manteiga&quot;, 40, 30, comida));</span>
+<span class="nc" id="L45">        estoque.addProduto(new Produto(&quot;Tomate&quot;, 40, 30, comida));</span>
+<span class="nc" id="L46">        estoque.addProduto(new Produto(&quot;Pao&quot;, 40, 30, comida));</span>
+<span class="nc" id="L47">        estoque.addProduto(new Produto(&quot;Batata&quot;, 40, 30, comida));</span>
+        do {
+<span class="nc" id="L49">            System.out.println(&quot;------------------Menu-----------------&quot;);</span>
+<span class="nc" id="L50">            System.out.println(&quot;1- Adicionar produto ao estoque&quot;);</span>
+<span class="nc" id="L51">            System.out.println(&quot;2- Listar produtos em estoque&quot;);</span>
+<span class="nc" id="L52">            System.out.println(&quot;3- Criar pedido&quot;);</span>
+<span class="nc" id="L53">            System.out.println(&quot;4- Consultar pedido&quot;);</span>
+<span class="nc" id="L54">            System.out.println(&quot;5- Listar pedidos&quot;);</span>
+<span class="nc" id="L55">            System.out.println(&quot;6- Adicionar item no pedido&quot;);</span>
+<span class="nc" id="L56">            System.out.println(&quot;7- Remover item do pedido&quot;);</span>
+<span class="nc" id="L57">            System.out.println(&quot;8- Confirmar estado do pedido&quot;);</span>
+<span class="nc" id="L58">            System.out.println(&quot;9- Cancelar pedido&quot;);</span>
+<span class="nc" id="L59">            System.out.println(&quot;10- Cesta básica&quot;);</span>
+<span class="nc" id="L60">            System.out.println(&quot;11- Consultar estado do pedido&quot;);</span>
+<span class="nc" id="L61">            System.out.println(&quot;12- Avaliar estabelecimento&quot;);</span>
+<span class="nc" id="L62">            System.out.println(&quot;13- Sair&quot;);</span>
+<span class="nc" id="L63">            opcao = sc.nextInt();</span>
+<span class="nc bnc" id="L64" title="All 13 branches missed.">            switch (opcao) {</span>
+                case 1:
+                    String nome;
+                    String tipo;
+                    int quantidade;
+                    double preco;
+<span class="nc" id="L70">                    System.out.println(&quot;Digite o nome do produto:&quot;);</span>
+<span class="nc" id="L71">                    nome = sc.next();</span>
+<span class="nc" id="L72">                    System.out.println(&quot;Digite a quantidade:&quot;);</span>
+<span class="nc" id="L73">                    quantidade = sc.nextInt();</span>
+<span class="nc" id="L74">                    System.out.println(&quot;Digite o preço do produto:&quot;);</span>
+<span class="nc" id="L75">                    preco = sc.nextDouble();</span>
+<span class="nc" id="L76">                    System.out.println(&quot;Digite o tipo do produto:&quot;);</span>
+<span class="nc" id="L77">                    tipo = sc.next();</span>
+<span class="nc" id="L78">                    Produto produto = new Produto(nome, quantidade, preco, tipo);</span>
+<span class="nc" id="L79">                    ProdutosCollection.getInstancia().addProduto(produto);</span>
+<span class="nc" id="L80">                    break;</span>
+                case 2:
+<span class="nc" id="L82">                    List&lt;Produto&gt; produtos = ProdutosCollection.getInstancia().getAll();</span>
+<span class="nc bnc" id="L83" title="All 2 branches missed.">                    if (produtos.isEmpty()) {</span>
+<span class="nc" id="L84">                        System.out.println(&quot;Não existe nenhum produto em estoque&quot;);</span>
+                    } else {
+<span class="nc bnc" id="L86" title="All 2 branches missed.">                        for (Produto prod : produtos) {</span>
+<span class="nc" id="L87">                            System.out.println(&quot;Nome: &quot; + prod.getNome());</span>
+<span class="nc" id="L88">                            System.out.println(&quot;Quantidade em estoque: &quot; + prod.getQuantidadeEmEstoque());</span>
+<span class="nc" id="L89">                            System.out.println(&quot;Preço unitário: &quot; + prod.getPrecoUnitario());</span>
+<span class="nc" id="L90">                            System.out.println(&quot;Tipo: &quot; + prod.getTipo());</span>
+<span class="nc" id="L91">                            System.out.println(&quot;-----------------------------------------------------------------&quot;);</span>
+<span class="nc" id="L92">                        }</span>
+                    }
+<span class="nc" id="L94">                    break;</span>
+                case 3:
+<span class="nc" id="L96">                    System.out.println(&quot;Digite o nome do cliente que esta pedindo&quot;);</span>
+<span class="nc" id="L97">                    nome = sc.next();</span>
+<span class="nc" id="L98">                    Cliente cliente = new Cliente(nome);</span>
+<span class="nc" id="L99">                    PedidosCollection.getInstancia().addPedido(new Contexto(LocalDateTime.now(), cliente));</span>
+<span class="nc" id="L100">                    System.out.println(&quot;Pedido criado com sucesso&quot;);</span>
+<span class="nc" id="L101">                    break;</span>
+                case 4:
+<span class="nc" id="L103">                    System.out.println(&quot;Digite  numero do pedido:&quot;);</span>
+                    try {
+<span class="nc" id="L105">                        Contexto pe = PedidosCollection.getInstancia().getPedido(sc.nextInt());</span>
+<span class="nc" id="L106">                        System.out.println(&quot;Cliente: &quot; + pe.getCliente().getNome());</span>
+<span class="nc" id="L107">                        System.out.println(&quot;Numero do pedido: &quot; + pe.getNumero());</span>
+<span class="nc" id="L108">                        System.out.println(&quot;Data do pedido: &quot; + pe.getData().getDayOfMonth() + &quot;/&quot; + pe.getData().getMonthValue() + &quot;/&quot; + pe.getData().getYear());</span>
+<span class="nc bnc" id="L109" title="All 2 branches missed.">                        if (pe.getValor() == 0) {</span>
+<span class="nc" id="L110">                            System.out.println(&quot;Pedido não finalizado&quot;);</span>
+                        } else {
+<span class="nc" id="L112">                            System.out.println(&quot;Valor: &quot; + pe.getValor());</span>
+<span class="nc" id="L113">                            System.out.println(&quot;Valor dos impostos: &quot; + pe.getValorTotalImpostos());</span>
+<span class="nc" id="L114">                            System.out.println(&quot;Valor dos descontos: &quot; + pe.getValorTotalDescontos());</span>
+<span class="nc" id="L115">                            System.out.println(&quot;Valor total a pagar: &quot; + pe.getValorTotalAPagar());</span>
+                        }
+<span class="nc" id="L117">                        System.out.println(&quot;----------Produtos-----------&quot;);</span>
+<span class="nc bnc" id="L118" title="All 2 branches missed.">                        for (ItemPedido item : pe.getProdutos()) {</span>
+<span class="nc" id="L119">                            System.out.println(&quot;Nome: &quot; + item.getItem().getNome() + &quot;, Quantidade: &quot; + item.getQuantidade());</span>
+<span class="nc" id="L120">                        }</span>
+<span class="nc" id="L121">                    } catch (RuntimeException e) {</span>
+<span class="nc" id="L122">                        System.out.println(e.getMessage());</span>
+<span class="nc" id="L123">                    }</span>
+<span class="nc" id="L124">                    break;</span>
+                case 5:
+<span class="nc" id="L126">                    List&lt;Contexto&gt; pedidos = PedidosCollection.getInstancia().getAll();</span>
+<span class="nc bnc" id="L127" title="All 2 branches missed.">                    if (pedidos.isEmpty()) {</span>
+<span class="nc" id="L128">                        System.out.println(&quot;Não existe nenhum pedido&quot;);</span>
+                    } else {
+<span class="nc bnc" id="L130" title="All 2 branches missed.">                        for (Contexto pedido : pedidos) {</span>
+<span class="nc" id="L131">                            System.out.println(&quot;Cliente: &quot; + pedido.getCliente().getNome());</span>
+<span class="nc" id="L132">                            System.out.println(&quot;Numero do pedido: &quot; + pedido.getNumero());</span>
+<span class="nc" id="L133">                            System.out.println(&quot;Data do pedido: &quot; + pedido.getData().getDayOfMonth() + &quot;/&quot; + pedido.getData().getMonthValue() + &quot;/&quot; + pedido.getData().getYear());</span>
+<span class="nc bnc" id="L134" title="All 2 branches missed.">                            if (pedido.getValor() == 0) {</span>
+<span class="nc" id="L135">                                System.out.println(&quot;Pedido não finalizado&quot;);</span>
+                            } else {
+<span class="nc" id="L137">                                System.out.println(&quot;Valor: &quot; + pedido.getValor());</span>
+<span class="nc" id="L138">                                System.out.println(&quot;Valor dos impostos: &quot; + pedido.getValorTotalImpostos());</span>
+<span class="nc" id="L139">                                System.out.println(&quot;Valor dos descontos: &quot; + pedido.getValorTotalDescontos());</span>
+<span class="nc" id="L140">                                System.out.println(&quot;Valor total a pagar: &quot; + pedido.getValorTotalAPagar());</span>
+<span class="nc" id="L141">                                System.out.println(&quot;----------Produtos-----------&quot;);</span>
+                            }
+<span class="nc bnc" id="L143" title="All 2 branches missed.">                            for (ItemPedido item : pedido.getProdutos()) {</span>
+<span class="nc" id="L144">                                System.out.println(&quot;Nome: &quot; + item.getItem().getNome() + &quot;, Quantidade: &quot; + item.getQuantidade());</span>
+<span class="nc" id="L145">                            }</span>
+<span class="nc" id="L146">                            System.out.println(&quot;-----------------------------------------------------------------&quot;);</span>
+<span class="nc" id="L147">                        }</span>
+                    }
+<span class="nc" id="L149">                    break;</span>
+                case 6:
+                    try {
+<span class="nc" id="L152">                        System.out.println(&quot;Digite o numero do pedido:&quot;);</span>
+<span class="nc" id="L153">                        Contexto pedido = PedidosCollection.getInstancia().getPedido(sc.nextInt());</span>
+<span class="nc" id="L154">                        List&lt;ItemPedido&gt; itens = new ArrayList&lt;&gt;();</span>
+                        do {
+                            try {
+<span class="nc" id="L157">                                System.out.println(&quot;Digite o nome do produto (Digite sair para terminar de digitar os produtos):&quot;);</span>
+<span class="nc" id="L158">                                nome = sc.next();</span>
+<span class="nc bnc" id="L159" title="All 2 branches missed.">                                if (nome.equalsIgnoreCase(&quot;sair&quot;))</span>
+<span class="nc" id="L160">                                    break;</span>
+<span class="nc" id="L161">                                System.out.println(&quot;Digite a quantidade&quot;);</span>
+<span class="nc" id="L162">                                quantidade = sc.nextInt();</span>
+<span class="nc" id="L163">                                itens.add(new ItemPedido(pedido, ProdutosCollection.getInstancia().getProduto(nome), quantidade));</span>
+<span class="nc" id="L164">                            } catch (RuntimeException e) {</span>
+<span class="nc" id="L165">                                System.out.println(e.getMessage());</span>
+<span class="nc" id="L166">                                nome = &quot;continuar&quot;;</span>
+<span class="nc" id="L167">                            }</span>
+<span class="nc bnc" id="L168" title="All 2 branches missed.">                        } while (!nome.equalsIgnoreCase(&quot;sair&quot;));</span>
+<span class="nc" id="L169">                        pedido.addItem(itens.toArray(new ItemPedido[itens.size()]));</span>
+<span class="nc" id="L170">                    } catch (RuntimeException e) {</span>
+<span class="nc" id="L171">                        System.out.println(e.getMessage());</span>
+<span class="nc" id="L172">                    }</span>
+<span class="nc" id="L173">                    break;</span>
+                case 7:
+                    try {
+<span class="nc" id="L176">                        System.out.println(&quot;Digite o numero do pedido:&quot;);</span>
+<span class="nc" id="L177">                        Contexto pedido = PedidosCollection.getInstancia().getPedido(sc.nextInt());</span>
+<span class="nc" id="L178">                        List&lt;ItemPedido&gt; itens = new ArrayList&lt;&gt;();</span>
+                        do {
+                            try {
+<span class="nc" id="L181">                                System.out.println(&quot;Digite o nome do produto (Digite sair para terminar de digitar os produtos):&quot;);</span>
+<span class="nc" id="L182">                                nome = sc.next();</span>
+<span class="nc bnc" id="L183" title="All 2 branches missed.">                                if (nome.equalsIgnoreCase(&quot;sair&quot;))</span>
+<span class="nc" id="L184">                                    break;</span>
+<span class="nc" id="L185">                                System.out.println(&quot;Digite a quantidade&quot;);</span>
+<span class="nc" id="L186">                                quantidade = sc.nextInt();</span>
+<span class="nc" id="L187">                                itens.add(new ItemPedido(pedido, ProdutosCollection.getInstancia().getProduto(nome), quantidade));</span>
+<span class="nc" id="L188">                            } catch (RuntimeException e) {</span>
+<span class="nc" id="L189">                                System.out.println(e.getMessage());</span>
+<span class="nc" id="L190">                                nome = &quot;continuar&quot;;</span>
+<span class="nc" id="L191">                            }</span>
+<span class="nc bnc" id="L192" title="All 2 branches missed.">                        } while (!nome.equalsIgnoreCase(&quot;sair&quot;));</span>
+<span class="nc" id="L193">                        pedido.removerItens(itens.toArray(new ItemPedido[itens.size()]));</span>
+<span class="nc" id="L194">                    } catch (RuntimeException e) {</span>
+<span class="nc" id="L195">                        System.out.println(e.getMessage());</span>
+<span class="nc" id="L196">                    }</span>
+<span class="nc" id="L197">                    break;</span>
+                case 8:
+                    try {
+<span class="nc" id="L200">                        System.out.println(&quot;Digite o numero do pedido:&quot;);</span>
+<span class="nc" id="L201">                        Contexto pedido = PedidosCollection.getInstancia().getPedido(sc.nextInt());</span>
+<span class="nc bnc" id="L202" title="All 2 branches missed.">                        if(pedido.toString().equalsIgnoreCase(&quot;Pedido aguardando pagamento&quot;)){</span>
+<span class="nc" id="L203">                            Contexto.pagar(pedido);</span>
+<span class="nc bnc" id="L204" title="All 4 branches missed.">                        } else if (pedido.toString().equalsIgnoreCase(&quot;Pedido cancelado pelo cliente&quot;) || pedido.toString().equalsIgnoreCase(&quot;Pedido cancelado pelo estabelecimento&quot;)) {</span>
+<span class="nc" id="L205">                            Contexto.reembolsar(pedido);</span>
+                        }
+<span class="nc" id="L207">                        pedido.avancar();</span>
+<span class="nc" id="L208">                        System.out.println(pedido.toString());</span>
+<span class="nc" id="L209">                    }catch(RuntimeException e){</span>
+<span class="nc" id="L210">                        System.out.println(e.getMessage());</span>
+<span class="nc" id="L211">                    }</span>
+<span class="nc" id="L212">                    break;</span>
+                case 9:
+                    try {
+<span class="nc" id="L215">                        System.out.println(&quot;Digite o numero do pedido:&quot;);</span>
+<span class="nc" id="L216">                        Contexto pedido = PedidosCollection.getInstancia().getPedido(sc.nextInt());</span>
+<span class="nc" id="L217">                        pedido.cancelar();</span>
+<span class="nc" id="L218">                        System.out.println(pedido.toString());</span>
+<span class="nc" id="L219">                    }catch(RuntimeException e){</span>
+<span class="nc" id="L220">                        System.out.println(e.getMessage());</span>
+<span class="nc" id="L221">                    }</span>
+<span class="nc" id="L222">                    break;</span>
+                case 10:
+                    try {
+<span class="nc" id="L225">                        System.out.println(&quot;Digite o nome do cliente que esta pedindo&quot;);</span>
+<span class="nc" id="L226">                        nome = sc.next();</span>
+<span class="nc" id="L227">                        cliente = new Cliente(nome);</span>
+                        Contexto pedido;
+<span class="nc" id="L229">                        CestaBasicaBuilder builder = new CestaBasicaBuilder(cliente);</span>
+<span class="nc" id="L230">                        DiretorBuilder diretor = new DiretorBuilder(builder);</span>
+
+<span class="nc" id="L232">                        System.out.println(&quot;Digite o tipo da cesta básica (Economica ou premium):&quot;);</span>
+<span class="nc" id="L233">                        String cesta = sc.next();</span>
+<span class="nc bnc" id="L234" title="All 4 branches missed.">                        if (!cesta.equalsIgnoreCase(&quot;Economica&quot;) &amp;&amp; !cesta.equalsIgnoreCase(&quot;Premium&quot;)) {</span>
+<span class="nc" id="L235">                            System.out.println(&quot;Tipo de cesta inválido&quot;);</span>
+                        } else {
+<span class="nc" id="L237">                            diretor.make(cesta);</span>
+<span class="nc" id="L238">                            pedido = builder.getPedido();</span>
+<span class="nc" id="L239">                            PedidosCollection.getInstancia().addPedido(pedido);</span>
+                        }
+<span class="nc" id="L241">                    }catch(RuntimeException e){</span>
+<span class="nc" id="L242">                        System.out.println(e.getMessage());</span>
+<span class="nc" id="L243">                    }</span>
+<span class="nc" id="L244">                    break;</span>
+                case 11:
+<span class="nc" id="L246">                    System.out.println(&quot;Digite o numero do pedido&quot;);</span>
+<span class="nc" id="L247">                    Contexto pedido = PedidosCollection.getInstancia().getPedido(sc.nextInt());</span>
+<span class="nc" id="L248">                    System.out.println(pedido.toString());</span>
+<span class="nc" id="L249">                    break;</span>
+                case 12:
+<span class="nc" id="L251">                    System.out.println(&quot;Digite o numero do pedido&quot;);</span>
+<span class="nc" id="L252">                    pedido = PedidosCollection.getInstancia().getPedido(sc.nextInt());</span>
+<span class="nc" id="L253">                    AvaliacoesCollection.getInstancia().addAvaliacao(Avaliacao.avaliar(pedido));</span>
+<span class="nc" id="L254">                    break;</span>
+                default:
+<span class="nc" id="L256">                    System.out.println(&quot;Opção inválida&quot;);</span>
+                    break;
+            }
+<span class="nc bnc" id="L259" title="All 2 branches missed.">        } while (opcao != 12);</span>
+
+<span class="nc" id="L261">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

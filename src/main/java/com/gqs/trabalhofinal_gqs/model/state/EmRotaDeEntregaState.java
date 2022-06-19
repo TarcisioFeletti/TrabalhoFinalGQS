@@ -9,9 +9,8 @@ public class EmRotaDeEntregaState extends State{
     public void avancar() {
         super.getContexto().changeEstado(new EntregueState(super.getContexto()));
     }
-
     @Override
-    public void cancelar(){
-        System.out.println("Impossível cancelar");
+    public String toString() {
+        return "Pedido em rota de entrega";
     }
 }
