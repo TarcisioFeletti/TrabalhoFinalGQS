@@ -20,23 +20,20 @@ public class ProdutosCollection {
         return instancia;
     }
 
-    private RuntimeException lancaExcecaoProduto(String nome) {
-        return new RuntimeException("O produto " + nome + " não se encontra em estoque");
+    public RuntimeException lancaExcecaoProduto(String nome) {
+        throw new RuntimeException("O produto " + nome + " não se encontra em estoque");
     }
 
-    private RuntimeException lancaExcecaoVazio() {
-        return new RuntimeException("Estoque vazio, adicione um item primeiro");
+    public RuntimeException lancaExcecaoVazio() {
+        throw new RuntimeException("Estoque vazio, adicione um item primeiro");
     }
 
     public void addProduto(Produto produto) throws RuntimeException {
-
-        for (Produto produtof : produtos) {
-            if (produto.getNome().equalsIgnoreCase(produtof.getNome())) {
-                produtof.setQuantidadeEmEstoque(produtof.getQuantidadeEmEstoque() + produto.getQuantidadeEmEstoque());
-                return;
-            }
+        if (produtos.contains(produto)) {
+            throw new RuntimeException("O produto " + produto.getNome() + " já se encontra em estoque");
+        } else {
+            this.produtos.add(produto);
         }
-        this.produtos.add(produto);
     }
 
     public Produto getProduto(String nome) throws RuntimeException {
@@ -48,7 +45,7 @@ public class ProdutosCollection {
                     return produto;
                 }
             }
-            throw lancaExcecaoProduto(nome);
+            return null;
         }
     }
 
@@ -105,12 +102,8 @@ public class ProdutosCollection {
                 }
             }
             if (!existe) {
-                throw lancaExcecaoProduto(nome);
+                throw new RuntimeException("Esse produto não existe");
             }
         }
-    }
-
-    public List<Produto> getAll() {
-        return produtos;
     }
 }

@@ -11,8 +11,7 @@ public class CanceladoPeloClienteState extends State{
     public void avancar() {
         super.getContexto().changeEstado(new ReembolsadoState(super.getContexto()));
     }
+
     @Override
-    public String toString() {
-        return "Pedido cancelado pelo cliente";
-    }
+    public void cancelar() {}
 }

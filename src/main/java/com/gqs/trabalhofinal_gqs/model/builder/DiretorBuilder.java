@@ -7,6 +7,10 @@ public class DiretorBuilder {
         this.builder = builder;
     }
 
+    public void setBuilder(IPedidoBuilder builder) {
+        this.builder = builder;
+    }
+
     public void make(String tipo){
         builder.reset();
         builder.addProdutosDeOrigemAnimal();

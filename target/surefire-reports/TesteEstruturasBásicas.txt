@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
-Test set: TesteEstruturasBásicas
+Test set: TesteEstruturasBÃ¡sicas
 -------------------------------------------------------------------------------
-Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.072 s - in TesteEstruturasBásicas
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.064 s - in TesteEstruturasBÃ¡sicas

@@ -1,5 +1,7 @@
 package com.gqs.trabalhofinal_gqs.model.state;
 
+import java.util.Scanner;
+
 public class AguardandoPagamentoState extends State{
     public AguardandoPagamentoState(Contexto contexto) {
         super(contexto);
@@ -12,12 +14,7 @@ public class AguardandoPagamentoState extends State{
 
     @Override
     public void cancelar() {
-        super.getContexto().repor();
+        super.getContexto().cancelar();
         super.getContexto().changeEstado(new CanceladoPeloClienteState(super.getContexto()));
-    }
-
-    @Override
-    public String toString() {
-        return "Pedido aguardando pagamento";
     }
 }

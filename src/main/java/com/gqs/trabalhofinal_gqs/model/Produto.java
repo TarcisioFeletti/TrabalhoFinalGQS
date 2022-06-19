@@ -29,10 +29,6 @@ public class Produto {
         return tipo;
     }
 
-    public void setQuantidadeEmEstoque(int quantidadeEmEstoque) {
-        this.quantidadeEmEstoque = quantidadeEmEstoque;
-    }
-
     public void vender(int quantidade) throws RuntimeException {
         if (quantidade > this.quantidadeEmEstoque) {
             throw new RuntimeException("Quantidade não disponível");
