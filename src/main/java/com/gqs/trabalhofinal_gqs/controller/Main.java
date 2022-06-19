@@ -103,6 +103,7 @@ public class Main {
                     System.out.println("Digite  numero do pedido:");
                     try {
                         Contexto pe = PedidosCollection.getInstancia().getPedido(sc.nextInt());
+
                         System.out.println("Cliente: " + pe.getCliente().getNome());
                         System.out.println("Numero do pedido: " + pe.getNumero());
                         System.out.println("Data do pedido: " + pe.getData().getDayOfMonth() + "/" + pe.getData().getMonthValue() + "/" + pe.getData().getYear());
@@ -243,14 +244,22 @@ public class Main {
                     }
                     break;
                 case 11:
-                    System.out.println("Digite o numero do pedido");
-                    Contexto pedido = PedidosCollection.getInstancia().getPedido(sc.nextInt());
-                    System.out.println(pedido.toString());
+                    try {
+                        System.out.println("Digite o numero do pedido");
+                        Contexto pedido = PedidosCollection.getInstancia().getPedido(sc.nextInt());
+                        System.out.println(pedido.toString());
+                    }catch(RuntimeException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 case 12:
+                    try{
                     System.out.println("Digite o numero do pedido");
-                    pedido = PedidosCollection.getInstancia().getPedido(sc.nextInt());
+                    Contexto pedido = PedidosCollection.getInstancia().getPedido(sc.nextInt());
                     AvaliacoesCollection.getInstancia().addAvaliacao(Avaliacao.avaliar(pedido));
+                    }catch(RuntimeException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 default:
                     System.out.println("Opção inválida");
