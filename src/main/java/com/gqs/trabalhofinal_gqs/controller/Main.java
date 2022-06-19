@@ -12,8 +12,6 @@ import com.gqs.trabalhofinal_gqs.model.builder.DiretorBuilder;
 import com.gqs.trabalhofinal_gqs.model.state.Contexto;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -23,29 +21,30 @@ public class Main {
     public static void main(String args[]) {
         Scanner sc = new Scanner(System.in);
         int opcao = 0;
-        //Produtos adicionados para os testes
+        //Produtos adicionados para os testes (preços não condizentes com a realidade, usados somente para testes)
         ProdutosCollection estoque = ProdutosCollection.getInstancia();
+        String comida = "Comida";
         estoque.addProduto(new Produto("Lapis", 10, 1.50, "Papelaria"));
         estoque.addProduto(new Produto("Caderno", 10, 10.99, "Papelaria"));
-        estoque.addProduto(new Produto("Carne", 40, 30, "Comida"));
-        estoque.addProduto(new Produto("Leite", 40, 30, "Comida"));
-        estoque.addProduto(new Produto("Ovo", 40, 30, "Comida"));
-        estoque.addProduto(new Produto("Arroz", 40, 30, "Comida"));
-        estoque.addProduto(new Produto("Feijão", 40, 30, "Comida"));
-        estoque.addProduto(new Produto("Canjica", 40, 30, "Comida"));
-        estoque.addProduto(new Produto("Trigo", 40, 30, "Comida"));
-        estoque.addProduto(new Produto("Açucar", 40, 30, "Comida"));
-        estoque.addProduto(new Produto("Cafe", 40, 30, "Comida"));
-        estoque.addProduto(new Produto("Oleo", 40, 30, "Comida"));
-        estoque.addProduto(new Produto("Maça", 40, 30, "Comida"));
-        estoque.addProduto(new Produto("Laranja", 40, 30, "Comida"));
-        estoque.addProduto(new Produto("Banana", 40, 30, "Comida"));
-        estoque.addProduto(new Produto("Arroz", 40, 30, "Comida"));
-        estoque.addProduto(new Produto("Feijao", 40, 30, "Comida"));
-        estoque.addProduto(new Produto("Manteiga", 40, 30, "Comida"));
-        estoque.addProduto(new Produto("Tomate", 40, 30, "Comida"));
-        estoque.addProduto(new Produto("Pao", 40, 30, "Comida"));
-        estoque.addProduto(new Produto("Batata", 40, 30, "Comida"));
+        estoque.addProduto(new Produto("Carne", 40, 30, comida));
+        estoque.addProduto(new Produto("Leite", 40, 30, comida));
+        estoque.addProduto(new Produto("Ovo", 40, 30, comida));
+        estoque.addProduto(new Produto("Arroz", 40, 30, comida));
+        estoque.addProduto(new Produto("Feijão", 40, 30, comida));
+        estoque.addProduto(new Produto("Canjica", 40, 30, comida));
+        estoque.addProduto(new Produto("Trigo", 40, 30, comida));
+        estoque.addProduto(new Produto("Açucar", 40, 30, comida));
+        estoque.addProduto(new Produto("Cafe", 40, 30, comida));
+        estoque.addProduto(new Produto("Oleo", 40, 30, comida));
+        estoque.addProduto(new Produto("Maça", 40, 30, comida));
+        estoque.addProduto(new Produto("Laranja", 40, 30, comida));
+        estoque.addProduto(new Produto("Banana", 40, 30, comida));
+        estoque.addProduto(new Produto("Arroz", 40, 30, comida));
+        estoque.addProduto(new Produto("Feijao", 40, 30, comida));
+        estoque.addProduto(new Produto("Manteiga", 40, 30, comida));
+        estoque.addProduto(new Produto("Tomate", 40, 30, comida));
+        estoque.addProduto(new Produto("Pao", 40, 30, comida));
+        estoque.addProduto(new Produto("Batata", 40, 30, comida));
         do {
             System.out.println("------------------Menu-----------------");
             System.out.println("1- Adicionar produto ao estoque");
@@ -64,7 +63,8 @@ public class Main {
             opcao = sc.nextInt();
             switch (opcao) {
                 case 1:
-                    String nome, tipo;
+                    String nome;
+                    String tipo;
                     int quantidade;
                     double preco;
                     System.out.println("Digite o nome do produto:");
@@ -151,7 +151,6 @@ public class Main {
                     try {
                         System.out.println("Digite o numero do pedido:");
                         Contexto pedido = PedidosCollection.getInstancia().getPedido(sc.nextInt());
-                        nome = "sair";
                         List<ItemPedido> itens = new ArrayList<>();
                         do {
                             try {
@@ -176,7 +175,6 @@ public class Main {
                     try {
                         System.out.println("Digite o numero do pedido:");
                         Contexto pedido = PedidosCollection.getInstancia().getPedido(sc.nextInt());
-                        nome = "sair";
                         List<ItemPedido> itens = new ArrayList<>();
                         do {
                             try {
@@ -227,7 +225,7 @@ public class Main {
                         System.out.println("Digite o nome do cliente que esta pedindo");
                         nome = sc.next();
                         cliente = new Cliente(nome);
-                        Contexto pedido = new Contexto(LocalDateTime.now(), cliente);
+                        Contexto pedido;
                         CestaBasicaBuilder builder = new CestaBasicaBuilder(cliente);
                         DiretorBuilder diretor = new DiretorBuilder(builder);
 

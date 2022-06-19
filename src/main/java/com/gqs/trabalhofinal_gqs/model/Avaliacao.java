@@ -1,6 +1,5 @@
 package com.gqs.trabalhofinal_gqs.model;
 
-import com.gqs.trabalhofinal_gqs.collection.AvaliacoesCollection;
 import com.gqs.trabalhofinal_gqs.model.state.Contexto;
 
 import java.util.Scanner;
@@ -19,6 +18,7 @@ public class Avaliacao {
     public Avaliacao(Avaliacao avaliacao) {
         this.nota = avaliacao.getNota();
         this.descricao = avaliacao.getDescricao();
+        this.pedido = avaliacao.getPedido();
     }
 
     public Integer getNota() {
@@ -27,6 +27,10 @@ public class Avaliacao {
 
     public String getDescricao() {
         return descricao;
+    }
+
+    public Contexto getPedido() {
+        return pedido;
     }
 
     public static Avaliacao avaliar(Contexto pedido){
@@ -38,7 +42,6 @@ public class Avaliacao {
         nota = sc.nextInt();
         System.out.println("Digite a descrição da avaliação");
         descricao = sc.next();
-        Avaliacao avaliacao = new Avaliacao(nota, descricao, pedido);
-        return avaliacao;
+        return new Avaliacao(nota, descricao, pedido);
     }
 }

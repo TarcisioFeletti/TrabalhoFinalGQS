@@ -1,7 +1,5 @@
 package com.gqs.trabalhofinal_gqs.model.state;
 
-import com.gqs.trabalhofinal_gqs.model.Avaliacao;
-
 public class ReembolsadoState extends State{
     public ReembolsadoState(Contexto contexto) {
         super(contexto);

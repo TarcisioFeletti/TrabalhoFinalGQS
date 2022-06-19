@@ -154,7 +154,7 @@ public class Contexto implements IState{
             } else if (valor == -1) {
                 System.out.println("Valor a ser reembolsado: " + pedido.getValorTotalAPagar());
             }
-        } while (valorCerto == false);
+        } while (!valorCerto);
     }
 
     public static void pagar(Contexto pedido){
@@ -171,6 +171,6 @@ public class Contexto implements IState{
             } else if (valor == -1) {
                 System.out.println("Valor a ser pago: " + pedido.getValorTotalAPagar());
             }
-        } while (valorCerto == false);
+        } while (!valorCerto);
     }
 }

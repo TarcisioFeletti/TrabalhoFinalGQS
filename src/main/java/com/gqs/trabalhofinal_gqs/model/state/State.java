@@ -10,11 +10,6 @@ public abstract class State implements IState{
     public Contexto getContexto() {
         return contexto;
     }
-
-    @Override
-    public abstract void avancar();
-    @Override
-    public abstract void cancelar();
     @Override
     public abstract String toString();
 }

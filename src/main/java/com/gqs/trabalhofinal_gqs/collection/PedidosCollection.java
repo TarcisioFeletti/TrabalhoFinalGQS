@@ -1,6 +1,5 @@
 package com.gqs.trabalhofinal_gqs.collection;
 
-import com.gqs.trabalhofinal_gqs.model.Produto;
 import com.gqs.trabalhofinal_gqs.model.state.Contexto;
 
 import java.util.ArrayList;
@@ -16,7 +15,7 @@ public class PedidosCollection {
 
     public static PedidosCollection getInstancia() {
         if (instancia == null) {
-            instancia = new PedidosCollection(new ArrayList());
+            instancia = new PedidosCollection(new ArrayList<Contexto>());
         }
         return instancia;
     }
