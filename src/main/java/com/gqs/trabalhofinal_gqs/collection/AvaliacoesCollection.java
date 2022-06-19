@@ -24,4 +24,7 @@ public class AvaliacoesCollection {
         this.avaliacoes.add(avaliacao);
     }
 
+    public List<Avaliacao> getAvaliacoes() {
+        return avaliacoes;
+    }
 }
