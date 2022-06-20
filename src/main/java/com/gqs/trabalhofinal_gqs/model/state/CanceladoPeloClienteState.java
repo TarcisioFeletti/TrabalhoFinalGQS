@@ -1,7 +1,5 @@
 package com.gqs.trabalhofinal_gqs.model.state;
 
-import java.util.Scanner;
-
 public class CanceladoPeloClienteState extends State{
     public CanceladoPeloClienteState(Contexto contexto) {
         super(contexto);
