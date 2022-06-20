@@ -1,6 +1,5 @@
 import com.gqs.trabalhofinal_gqs.collection.ProdutosCollection;
 import com.gqs.trabalhofinal_gqs.model.Cliente;
-import com.gqs.trabalhofinal_gqs.model.ItemPedido;
 import com.gqs.trabalhofinal_gqs.model.state.Contexto;
 import com.gqs.trabalhofinal_gqs.model.Produto;
 import com.gqs.trabalhofinal_gqs.model.builder.CestaBasicaBuilder;

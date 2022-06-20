@@ -2,12 +2,9 @@ import com.gqs.trabalhofinal_gqs.collection.AvaliacoesCollection;
 import com.gqs.trabalhofinal_gqs.collection.PedidosCollection;
 import com.gqs.trabalhofinal_gqs.collection.ProdutosCollection;
 import com.gqs.trabalhofinal_gqs.model.*;
-import com.gqs.trabalhofinal_gqs.model.builder.CestaBasicaBuilder;
-import com.gqs.trabalhofinal_gqs.model.builder.DiretorBuilder;
 import com.gqs.trabalhofinal_gqs.model.chain.desconto.ProcessaDesconto;
 import com.gqs.trabalhofinal_gqs.model.state.Contexto;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
